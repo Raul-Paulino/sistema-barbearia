@@ -1,0 +1,221 @@
+/* =========================================================
+   BARBER & CO. – ajustes só da página admin
+   (o restante vem do style.css)
+   ========================================================= */
+
+main { min-height: 78vh; }
+
+/* ---------- Login ---------- */
+.login {
+  min-height: 78vh;
+  display: grid;
+  place-items: center;
+  padding: 7rem 5vw 3rem;
+}
+
+.login__cartao {
+  width: 100%;
+  max-width: 25rem;
+  display: grid;
+  gap: 0.2rem;
+  padding: 2rem;
+  background: var(--carta);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--latao);
+  border-radius: 14px;
+}
+
+.login__cartao h1 {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-size: 1.8rem;
+}
+
+.login__texto { margin: 0.2rem 0 0.6rem; color: var(--osso-fraco); }
+
+.login__demo {
+  margin: 0 0 0.4rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px dashed var(--latao);
+  border-radius: var(--raio);
+  background: rgba(200, 150, 62, 0.08);
+  font-size: 0.9rem;
+}
+.login__demo strong { color: var(--latao); }
+
+.login__cartao .erro { margin-top: 1rem; }
+.login__cartao .btn { margin-top: 1.2rem; width: 100%; text-align: center; }
+.login__cartao .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+input[type="password"] {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: var(--espresso);
+  color: var(--osso);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  font: inherit;
+}
+
+/* Campo de senha com o botão "Mostrar" por cima, à direita */
+.campo-senha { position: relative; }
+.campo-senha input { padding-right: 5.5rem; }
+
+.campo-senha__ver {
+  position: absolute;
+  top: 50%;
+  right: 0.6rem;
+  transform: translateY(-50%);
+  padding: 0.35rem 0.7rem;
+  background: transparent;
+  color: var(--latao);
+  border: 0;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.campo-senha__ver:hover { text-decoration: underline; }
+.campo-senha__ver:focus-visible { outline: 2px solid var(--latao); }
+
+/* ---------- Painel ---------- */
+.admin {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 8rem 5vw 3rem;
+}
+
+.admin__topo h1 {
+  margin: 0;
+  font-family: var(--fonte-titulo);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+}
+.admin__topo p { margin: 0.3rem 0 2rem; color: var(--osso-fraco); }
+
+
+/* ---------- Números rápidos ---------- */
+.estatisticas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.estat {
+  display: grid;
+  gap: 0.2rem;
+  padding: 1.1rem 1.2rem;
+  background: var(--carta);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+}
+.estat strong { font-family: var(--fonte-titulo); font-size: 1.9rem; line-height: 1.1; color: var(--latao); }
+.estat span { color: var(--osso-fraco); font-size: 0.9rem; }
+
+/* ---------- Filtros ---------- */
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 0 0 0.5rem;
+}
+.filtros > div { min-width: 12rem; }
+.filtros .campo { margin-top: 0; }
+.filtros .btn { align-self: flex-end; }
+.filtros #btn-apagar { margin-left: auto; }
+
+select {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: var(--espresso);
+  color: var(--osso);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  font: inherit;
+  color-scheme: dark;
+}
+select:focus-visible { outline: 2px solid var(--latao); outline-offset: 3px; }
+
+/* ---------- Lista de agendamentos ---------- */
+.agenda__dia {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  margin: 2rem 0 0.8rem;
+  font-family: var(--fonte-titulo);
+  font-size: 1.3rem;
+  text-transform: capitalize;
+}
+.agenda__dia:first-child { margin-top: 0; }
+.agenda__dia small { font-family: var(--fonte-texto); font-size: 0.9rem; color: var(--osso-fraco); text-transform: none; }
+.agenda__hoje { padding: 0.1rem 0.6rem; border-radius: 99px; background: var(--latao); color: var(--espresso); font-family: var(--fonte-texto); font-size: 0.8rem; font-weight: 700; text-transform: none; }
+
+.agenda__item {
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: 0.8rem;
+  padding: 1.1rem 1.3rem;
+  background: var(--carta);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--borda);
+  border-left: 4px solid var(--latao);
+  border-radius: 12px;
+}
+.agenda__item--confirmado { border-left-color: #5b9b68; }
+.agenda__item--cancelado { border-left-color: var(--vermelho); opacity: 0.6; }
+.agenda__item--passado { opacity: 0.55; }
+
+.agenda__hora { font-family: var(--fonte-titulo); font-size: 1.6rem; font-weight: 800; }
+
+.agenda__info { display: grid; gap: 0.1rem; min-width: 0; }
+.agenda__info strong { font-size: 1.05rem; overflow-wrap: anywhere; }
+.agenda__info span { color: var(--osso-fraco); font-size: 0.95rem; }
+.agenda__info em { margin-top: 0.3rem; color: var(--osso); font-size: 0.92rem; overflow-wrap: anywhere; }
+
+.agenda__acoes { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 0.5rem; }
+.agenda__acoes .btn { padding: 0.5rem 0.9rem; font-size: 0.88rem; }
+
+.btn--perigo { border-color: var(--vermelho); color: #f1c4c4; background: transparent; }
+.btn--perigo:hover { background: rgba(155, 44, 44, 0.25); }
+
+.selo { padding: 0.2rem 0.7rem; border-radius: 99px; font-size: 0.8rem; font-weight: 700; border: 1px solid; }
+.selo--pendente   { color: var(--latao); border-color: var(--latao); }
+.selo--confirmado { color: #8fd09b; border-color: #5b9b68; }
+.selo--cancelado  { color: #f1c4c4; border-color: var(--vermelho); }
+
+.agenda__vazio {
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  background: var(--carta);
+  border: 1px dashed var(--borda);
+  border-radius: 14px;
+  color: var(--osso-fraco);
+}
+.agenda__vazio .btn { margin-top: 1rem; }
+.agenda__vazio strong { display: block; margin-bottom: 0.3rem; color: var(--osso); font-family: var(--fonte-titulo); font-size: 1.2rem; }
+
+@media (max-width: 1000px) {
+  .estatisticas { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 700px) {
+  .agenda__item { grid-template-columns: 1fr; gap: 0.6rem; }
+  .agenda__acoes { justify-content: flex-start; }
+}
+
+@media (max-width: 600px) {
+  .filtros > div { flex: 1 1 100%; }
+  .estat strong { font-size: 1.5rem; }
+  .login { padding-top: 8rem; }
+  .login__cartao { padding: 1.4rem; }
+  .admin { padding-top: 8rem; }
+}

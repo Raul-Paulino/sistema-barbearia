@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Painel admin – Barber & Co.</title>
+  <meta name="theme-color" content="#14110f">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%92%88%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Usa o mesmo visual do site, mais alguns ajustes só do admin -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <!-- ========== CABEÇALHO ========== -->
+  <header class="topo">
+    <a href="index.html" class="logo">Barber <span>&</span> Co.</a>
+    <nav class="menu">
+      <a href="index.html" class="btn btn--contorno">Voltar ao site</a>
+      <button type="button" class="btn btn--primario" id="btn-sair" hidden>Sair</button>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ========== TELA DE LOGIN ========== -->
+    <section class="login" id="tela-login">
+      <form class="login__cartao" id="form-login" novalidate>
+        <h1>Área do barbeiro</h1>
+        <p class="login__texto">Entre para ver e confirmar os agendamentos.</p>
+        <p class="login__demo">Demonstração: usuário <strong>RaulAlves</strong> e senha <strong>raul123</strong></p>
+
+        <label class="campo" for="usuario">Usuário</label>
+        <input type="text" id="usuario" name="usuario" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+
+        <label class="campo" for="senha">Senha</label>
+        <div class="campo-senha">
+          <input type="password" id="senha" name="senha" autocomplete="current-password" required>
+          <button type="button" class="campo-senha__ver" id="btn-ver-senha" aria-label="Mostrar senha">Mostrar</button>
+        </div>
+
+        <p class="erro" id="erro-login" role="alert" hidden></p>
+
+        <button type="submit" class="btn btn--primario btn--grande" id="btn-entrar">Entrar</button>
+      </form>
+    </section>
+
+    <!-- ========== PAINEL (só aparece depois do login) ========== -->
+    <section class="admin" id="tela-painel" hidden>
+      <div class="admin__topo">
+        <h1>Olá, <span id="nome-admin"></span></h1>
+        <p>Aqui você vai gerenciar os agendamentos.</p>
+      </div>
+
+      <!-- Números rápidos -->
+      <div class="estatisticas" aria-label="Resumo">
+        <div class="estat"><strong id="est-pendentes">0</strong><span>Aguardando confirmação</span></div>
+        <div class="estat"><strong id="est-confirmados">0</strong><span>Confirmados (de hoje em diante)</span></div>
+        <div class="estat"><strong id="est-hoje">0</strong><span>Atendimentos hoje</span></div>
+        <div class="estat"><strong id="est-valor">R$ 0,00</strong><span>Previsto nos confirmados</span></div>
+      </div>
+
+      <!-- Filtros -->
+      <div class="filtros">
+        <div>
+          <label class="campo" for="filtro-data">Data</label>
+          <input type="date" id="filtro-data">
+        </div>
+        <div>
+          <label class="campo" for="filtro-status">Status</label>
+          <select id="filtro-status">
+            <option value="todos">Todos</option>
+            <option value="pendente">Aguardando confirmação</option>
+            <option value="confirmado">Confirmados</option>
+            <option value="cancelado">Cancelados</option>
+          </select>
+        </div>
+        <button type="button" class="btn btn--contorno" id="btn-limpar">Limpar filtros</button>
+        <button type="button" class="btn btn--perigo" id="btn-apagar">Apagar todos os dados</button>
+      </div>
+
+      <!-- Lista (criada pelo js/admin.js) -->
+      <div class="agenda" id="lista-agendamentos"></div>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <p>Barber & Co. · Área restrita</p>
+    <p class="rodape__nota">Projeto de portfólio. Os dados ficam salvos apenas neste navegador.</p>
+  </footer>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

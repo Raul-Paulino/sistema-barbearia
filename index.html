@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Barber & Co. – Agende seu horário</title>
+  <meta name="description" content="Agende seu corte ou barba online em um minuto: escolha o serviço, o dia e o horário e confirme pelo WhatsApp.">
+  <meta name="theme-color" content="#14110f">
+  <meta property="og:title" content="Barber & Co. – Agende seu horário">
+  <meta property="og:description" content="Escolha o serviço, o dia e a hora. Confirmação rápida pelo WhatsApp.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%92%88%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========== CABEÇALHO ========== -->
+  <header class="topo">
+    <a href="index.html" class="logo">Barber <span>&</span> Co.</a>
+    <nav class="menu">
+      <a href="#agendar" class="btn btn--primario">Agendar horário</a>
+      <a href="admin.html" class="btn btn--contorno">Painel admin</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ========== HERO (imagem de fundo) ========== -->
+    <section class="hero">
+      <div class="hero__conteudo">
+        <h1>Corte feito com calma.<br>Horário marcado em um minuto.</h1>
+        <p>Escolha o serviço, o dia e a hora. Você confirma pelo WhatsApp e a gente te espera na cadeira.</p>
+        <a href="#agendar" class="btn btn--primario btn--grande">Escolher meu horário</a>
+      </div>
+
+      <!-- Moldura da foto. A imagem vem de img/hero.jpg (veja o CSS) -->
+      <div class="hero__foto" aria-hidden="true">
+        <div class="hero__selo">
+          <strong>Desde 2015</strong>
+          <span>Tradição em cada corte</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FAIXA DE INFORMAÇÕES ========== -->
+    <section class="faixa" aria-label="Informações da barbearia">
+      <div class="faixa__item">
+        <strong>Seg a Sáb</strong>
+        <span>Das 9h às 19h</span>
+      </div>
+      <div class="faixa__item">
+        <strong>Hora marcada</strong>
+        <span>Sem fila e sem espera</span>
+      </div>
+      <div class="faixa__item">
+        <strong>Confirmação rápida</strong>
+        <span>Direto pelo WhatsApp</span>
+      </div>
+    </section>
+
+    <!-- ========== FORMULÁRIO DE AGENDAMENTO ========== -->
+    <section class="agendamento" id="agendar">
+      <form id="form-agendamento" class="painel" novalidate>
+
+        <div class="passos">
+
+        <!-- Passo 1: serviços -->
+        <fieldset class="bloco">
+          <legend><span class="passo">1</span> Escolha o serviço</legend>
+
+          <div class="servicos" id="lista-servicos">
+            <!-- Os cartões de serviço são criados pelo js/app.js -->
+          </div>
+        </fieldset>
+
+        <!-- Passo 2: data e horário -->
+        <fieldset class="bloco">
+          <legend><span class="passo">2</span> Escolha o dia e a hora</legend>
+
+          <label class="campo" for="data">Data do atendimento</label>
+          <input type="date" id="data" name="data" required>
+
+          <p class="campo">Horários livres</p>
+          <div class="horarios" id="lista-horarios">
+            <!-- Os botões de horário serão criados pelo JavaScript -->
+            <p class="aviso">Escolha uma data para ver os horários.</p>
+          </div>
+        </fieldset>
+
+        <!-- Passo 3: dados do cliente -->
+        <fieldset class="bloco">
+          <legend><span class="passo">3</span> Seus dados</legend>
+
+          <label class="campo" for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" placeholder="Como podemos te chamar?" required>
+
+          <label class="campo" for="telefone">WhatsApp</label>
+          <input type="tel" id="telefone" name="telefone" placeholder="(35) 99999-9999" required>
+
+          <label class="campo" for="obs">Observação (opcional)</label>
+          <textarea id="obs" name="obs" rows="3" placeholder="Ex.: degradê na régua, mais curto nas laterais..."></textarea>
+        </fieldset>
+
+        </div>
+
+        <!-- Resumo + envio (fica fixo ao lado no computador) -->
+        <aside class="resumo" id="resumo">
+          <h2>Seu agendamento</h2>
+          <dl>
+            <div><dt>Serviço</dt><dd id="resumo-servico">Não escolhido</dd></div>
+            <div><dt>Data</dt><dd id="resumo-data">Não escolhida</dd></div>
+            <div><dt>Horário</dt><dd id="resumo-hora">Não escolhido</dd></div>
+          </dl>
+          <p class="resumo__total">Total <strong id="total">R$ 0,00</strong></p>
+
+          <!-- Mensagem de erro da validação -->
+          <p class="erro" id="erro" role="alert" hidden></p>
+
+          <button type="submit" class="btn btn--primario btn--grande">Agendar e enviar no WhatsApp</button>
+          <small>Você confirma pelo WhatsApp. Nada é cobrado agora.</small>
+
+          <!-- Aparece depois que o agendamento é salvo -->
+          <div class="sucesso" id="sucesso" role="status" hidden>
+            <strong>Horário reservado!</strong>
+            <p>Falta só um passo: envie a mensagem para o barbeiro confirmar.</p>
+            <a class="btn btn--primario" id="link-whatsapp" href="#" target="_blank" rel="noopener">Abrir WhatsApp</a>
+          </div>
+        </aside>
+
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="rodape">
+    <p>Barber & Co. · Seg a Sáb, das 9h às 19h</p>
+    <p class="rodape__nota">Projeto de portfólio. Os agendamentos ficam salvos apenas neste navegador.</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

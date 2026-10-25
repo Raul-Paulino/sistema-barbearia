@@ -1,0 +1,430 @@
+/* =========================================================
+   BARBER & CO. – estilos da tela do cliente
+   Paleta: espresso (fundo), osso (texto), latão (destaque),
+   vermelho de barbeiro (detalhes/alertas)
+   ========================================================= */
+
+:root {
+  color-scheme: dark;   /* barras de rolagem e campos no tema escuro */
+  --espresso: #14110f;
+  --espresso-claro: #1f1b18;
+  --osso: #efe6d6;
+  --osso-fraco: #b9ad99;
+  --latao: #c8963e;
+  --latao-escuro: #a47a2c;
+  --vermelho: #9b2c2c;
+  --borda: rgba(239, 230, 214, 0.14);
+  --carta: rgba(16, 14, 12, 0.72);   /* fundo translúcido dos cartões */
+  --raio: 10px;
+
+  --fonte-titulo: "Fraunces", Georgia, serif;
+  --fonte-texto: "Manrope", system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  background: var(--espresso);   /* cor de segurança enquanto a foto carrega */
+}
+
+/* Foto de fundo da página inteira (fica parada enquanto a página rola).
+   Camadas: 1) escurecimento  2) sua foto img/fundo.jpg (se existir)  3) foto do Unsplash */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(12, 10, 9, 0.80), rgba(12, 10, 9, 0.90)),
+    url("../img/fundo.jpg") center / cover no-repeat,
+    url("https://images.unsplash.com/photo-1702865272115-5afdbae975af?auto=format&fit=crop&w=1800&q=70") center / cover no-repeat;
+}
+
+body {
+  overflow-x: clip;          /* nunca deixa a página rolar para o lado */
+  margin: 0;
+  background: transparent;
+  color: var(--osso);
+  font-family: var(--fonte-texto);
+  line-height: 1.6;
+}
+
+img { max-width: 100%; display: block; }
+
+/* ---------- Cabeçalho ---------- */
+.topo {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 1.25rem 5vw;
+}
+
+.logo {
+  font-family: var(--fonte-titulo);
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--osso);
+  text-decoration: none;
+}
+.logo span { color: var(--latao); }
+
+.menu { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+
+/* ---------- Botões ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;      /* alvo de toque confortável no celular */
+  padding: 0.65rem 1.2rem;
+  border-radius: var(--raio);
+  font-family: var(--fonte-texto);
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btn--primario { background: var(--latao); color: var(--espresso); }
+.btn--primario:hover { background: var(--latao-escuro); }
+
+.btn--contorno { border-color: var(--borda); color: var(--osso); background: rgba(28, 22, 18, 0.5); }
+.btn--contorno:hover { border-color: var(--latao); color: var(--latao); }
+
+.btn--grande { padding: 0.95rem 1.8rem; font-size: 1.05rem; }
+
+.btn:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+.servico:has(input:focus-visible),
+.horario:focus-visible {
+  outline: 2px solid var(--latao);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--latao);
+  color: var(--espresso);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  min-height: 82vh;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 4vw;
+  padding: 7rem 5vw 4rem;
+  background: none;
+}
+
+.hero__conteudo { max-width: 38rem; }
+
+.hero h1 {
+  font-family: var(--fonte-titulo);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 4.8vw, 3.8rem);
+  line-height: 1.1;
+  margin: 0 0 1.2rem;
+}
+
+.hero p {
+  color: var(--osso-fraco);
+  font-size: 1.1rem;
+  max-width: 32rem;
+  margin: 0 0 2rem;
+}
+
+/* Moldura em arco com a foto.
+   Ordem das camadas: 1) img/hero.jpg (sua foto, se existir)
+                      2) foto do Unsplash (link da internet)
+                      3) listrado, caso nada carregue */
+.hero__foto {
+  position: relative;
+  justify-self: center;
+  width: min(100%, 26rem);
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--latao);
+  border-radius: 13rem 13rem 14px 14px;
+  background:
+    url("../img/hero.jpg") center / cover no-repeat,
+    url("https://images.unsplash.com/photo-1672642150228-3fcd5826ec26?auto=format&fit=crop&w=1000&q=70") center / cover no-repeat,
+    repeating-linear-gradient(135deg, var(--espresso-claro) 0 18px, var(--espresso) 18px 36px);
+}
+
+.hero__selo {
+  position: absolute;
+  left: -1.5rem;
+  bottom: 2.5rem;
+  display: grid;
+  padding: 0.9rem 1.2rem;
+  background: var(--espresso);
+  border: 1px solid var(--latao);
+  border-radius: var(--raio);
+}
+.hero__selo strong { font-family: var(--fonte-titulo); font-size: 1.2rem; color: var(--latao); }
+.hero__selo span { color: var(--osso-fraco); font-size: 0.9rem; }
+
+/* ---------- Faixa de informações ---------- */
+.faixa {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 0 5vw;
+  padding: 1.8rem 0;
+  border-top: 1px solid var(--borda);
+  border-bottom: 1px solid var(--borda);
+}
+
+.faixa__item { display: grid; text-align: center; }
+.faixa__item strong { font-family: var(--fonte-titulo); font-size: 1.15rem; }
+.faixa__item span { color: var(--osso-fraco); font-size: 0.95rem; }
+
+/* ---------- Agendamento ---------- */
+.agendamento {
+  padding: 4rem 5vw 5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.painel {
+  width: 100%;
+  max-width: 68rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.passos { display: grid; gap: 1.5rem; }
+
+.bloco {
+  min-width: 0;              /* fieldset tem largura mínima padrão que estoura no celular */
+  margin: 0;
+  padding: 1.75rem;
+  background: var(--carta);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--borda);
+  border-radius: 14px;
+}
+
+.bloco legend {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0 0.5rem;
+  font-family: var(--fonte-titulo);
+  font-weight: 600;
+  font-size: 1.35rem;
+}
+
+.passo {
+  display: inline-grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: var(--latao);
+  color: var(--espresso);
+  font-family: var(--fonte-texto);
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+/* ---------- Serviços (cartões selecionáveis) ---------- */
+.servicos { display: grid; gap: 0.8rem; margin-top: 0.8rem; }
+
+.servico {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  background: var(--espresso);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.servico:hover { border-color: var(--osso-fraco); }
+
+/* O input fica escondido, mas continua funcionando (acessível por teclado) */
+.servico input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.servico:has(input:checked) {
+  border-color: var(--latao);
+  background: rgba(200, 150, 62, 0.1);
+}
+
+.servico__info { display: grid; }
+.servico__info small { color: var(--osso-fraco); }
+.servico__preco { font-weight: 800; color: var(--latao); white-space: nowrap; }
+
+/* ---------- Campos ---------- */
+.campo {
+  display: block;
+  margin: 1.2rem 0 0.4rem;
+  color: var(--osso-fraco);
+  font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: var(--espresso);
+  color: var(--osso);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  font: inherit;
+}
+
+input[type="date"] { color-scheme: dark; }
+textarea { resize: vertical; }
+
+/* ---------- Horários ---------- */
+.horarios {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
+  gap: 0.6rem;
+}
+
+.horario {
+  padding: 0.7rem 0;
+  background: var(--espresso);
+  color: var(--osso);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.horario:hover:not(:disabled) { border-color: var(--latao); }
+.horario.ativo { background: var(--latao); color: var(--espresso); border-color: var(--latao); }
+.horario:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.aviso { grid-column: 1 / -1; margin: 0; color: var(--osso-fraco); }
+
+/* ---------- Resumo (cartão lateral) ---------- */
+.resumo {
+  position: sticky;
+  top: 1.5rem;
+  display: grid;
+  gap: 1rem;
+  padding: 1.75rem;
+  background: var(--carta);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--latao);
+  border-radius: 14px;
+}
+
+.resumo h2 { margin: 0; font-family: var(--fonte-titulo); font-size: 1.35rem; }
+
+.resumo dl { margin: 0; display: grid; gap: 0.7rem; }
+.resumo dl div { display: flex; justify-content: space-between; gap: 1rem; padding-bottom: 0.7rem; border-bottom: 1px solid var(--borda); }
+.resumo dt { color: var(--osso-fraco); }
+.resumo dd { margin: 0; font-weight: 700; text-align: right; }
+
+.resumo__total { display: flex; justify-content: space-between; align-items: baseline; margin: 0; }
+.resumo__total strong { color: var(--latao); font-size: 1.6rem; }
+
+.resumo .btn { width: 100%; text-align: center; }
+.resumo small { color: var(--osso-fraco); text-align: center; }
+
+/* ---------- Erro e sucesso ---------- */
+[hidden] { display: none !important; }
+
+.erro {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--vermelho);
+  border-radius: var(--raio);
+  background: rgba(155, 44, 44, 0.2);
+  color: #f1c4c4;
+  font-size: 0.95rem;
+}
+
+.sucesso {
+  display: grid;
+  gap: 0.6rem;
+  padding: 1rem;
+  border: 1px solid var(--latao);
+  border-radius: var(--raio);
+  background: rgba(200, 150, 62, 0.12);
+  text-align: center;
+}
+.sucesso strong { font-family: var(--fonte-titulo); font-size: 1.2rem; color: var(--latao); }
+.sucesso p { margin: 0; color: var(--osso-fraco); }
+
+/* ---------- Rodapé ---------- */
+.rodape {
+  padding: 2rem 5vw;
+  text-align: center;
+  color: var(--osso-fraco);
+  border-top: 1px solid var(--borda);
+  background: rgba(12, 10, 9, 0.6);
+}
+
+.rodape p { margin: 0; }
+.rodape__nota { margin-top: 0.3rem !important; font-size: 0.85rem; opacity: 0.8; }
+
+/* ---------- Celular ---------- */
+/* Telas médias: tablet, ou janela do navegador com o F12 aberto */
+@media (max-width: 1000px) {
+  .painel { grid-template-columns: 1fr; }
+  .resumo { position: static; }
+}
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; padding-top: 7rem; min-height: auto; }
+  .hero__foto { width: min(100%, 20rem); }
+  .hero__selo { left: 0.5rem; }
+}
+
+/* Celular */
+@media (max-width: 600px) {
+  .topo { justify-content: center; }
+  .logo { font-size: 1.3rem; }
+  .btn { padding: 0.55rem 0.95rem; font-size: 0.9rem; }
+  .btn--grande { padding: 0.85rem 1.4rem; font-size: 1rem; }
+
+  .hero { padding: 8rem 5vw 3rem; }
+  .hero p { font-size: 1rem; }
+
+  .faixa { grid-template-columns: 1fr; gap: 1rem; }
+
+  .agendamento { padding: 2.5rem 4vw 3.5rem; }
+  .bloco { padding: 1.1rem; }
+  .bloco legend { font-size: 1.15rem; }
+  .servico { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
+  .horarios { grid-template-columns: repeat(auto-fill, minmax(4.5rem, 1fr)); }
+  .resumo { padding: 1.25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}
